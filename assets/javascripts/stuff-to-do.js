@@ -72,7 +72,7 @@ function saveOrder() {
   
   jQuery.ajax({
     type: "POST",
-    url: 'stuff_to_do/reorder.js',
+    url: 'stuff_to_do/reorder',
     data: data,
     async: false,
     success: function(response) {

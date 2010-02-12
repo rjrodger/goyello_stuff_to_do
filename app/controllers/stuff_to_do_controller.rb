@@ -228,7 +228,8 @@ class StuffToDoController < ApplicationController
         else
           @logtime_entry = LogtimeEntry.find_by_issue_id_and_user_id(params[:issue][:id], User.current.id);
           @allowed_statuses = @issue.new_statuses_allowed_to(User.current)
-          @activities = Enumeration.find_all_by_opt('ACTI');
+          #@activities = Enumeration.find_all_by_opt('ACTI');
+          @activities = TimeEntryActivity.all
 
           if(request.env['HTTP_REFERER'].match(/end_of_work/))
             render :partial => 'quicklog_form' and return
@@ -259,7 +260,8 @@ class StuffToDoController < ApplicationController
     @allowed_statuses = @issue.new_statuses_allowed_to(User.current)
     @time_entry = TimeEntry.new(:hours => @logtime_entry.recorded_time,
       :spent_on => Date.parse(@logtime_entry.start_date.to_s))
-    @activities = Enumeration.find_all_by_opt('ACTI');
+    #@activities = Enumeration.find_all_by_opt('ACTI');
+    @activities = TimeEntryActivity.all
 
     if(@issue_id.nil?)
       render :partial => 'save_single_entry'
